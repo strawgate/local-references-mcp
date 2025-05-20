@@ -1,0 +1,85 @@
+[project]
+name = "local-references-mcp"
+version = "0.1.0"
+description = "Offer documentation in your local filesystem as references via mcp tools"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "asyncclick>=8.1.8",
+    "fastmcp>=2.3.5",
+    "mcp>=1.9.0",
+    "pydantic>=2.11.4",
+    "syrupy>=4.9.1",
+]
+
+[tool.poetry]
+packages = [
+    { include = "local_references_mcp", from = "src" }
+]
+[tool.hatch.metadata]
+allow-direct-references=true
+
+[tool.poetry.scripts]
+local_references_mcp = "local_references_mcp.main:run_mcp"
+
+
+[dependency-groups]
+dev = [
+  "pytest",
+  "pytest-mock",
+  "ruff"
+]
+lint = [
+  "ruff"
+]
+
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning>=0.7.0"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+target-version = "py312"
+lint.fixable = ["ALL"]
+lint.ignore = [
+    "COM812"
+]
+lint.extend-select = [
+    "A",
+    "ARG",
+    "B",
+    "C4",
+    "COM",
+    "DTZ",
+    "E",
+    "EM",
+    "F",
+    "FURB",
+    "I",
+    "LOG",
+    "N",
+    "PERF",
+    "PIE",
+    "PLR",
+    "PLW",
+    "PT",
+    "PTH",
+    "Q",
+    "RET",
+    "RSE",
+    "RUF",
+    "S",
+    "SIM",
+    "TC",
+    "TID",
+    "TRY",
+    "UP",
+    "W",
+]
+
+line-length = 140
+
+[tool.ruff.lint.extend-per-file-ignores]
+"tests/*.py" = [
+    "S101", # Ignore asserts
+    "DTZ005" # Ignore datetime.UTC
+]
